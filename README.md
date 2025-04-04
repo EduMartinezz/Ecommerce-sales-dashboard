@@ -13,8 +13,6 @@ This project demonstrates a full end-to-end solution, combining data analytics, 
 - **Downloads**: Export the sales trend plot as HTML (`sales_forecast.html`) and forecast data as CSV (`forecast_data.csv`).
 - **Debug Info**: Provides detailed statistics (e.g., date ranges, NaN counts, forecast stats) for troubleshooting.
 
-![Sales Trend & Forecasts Plot](images/dashboard_screenshot.png)  
-*Figure 1: Sales trend plot showing actual sales, ARIMA, and Prophet forecasts with 95% confidence intervals (Jan 4, 2025 – Apr 4, 2025).*
 
 ## Why This Project?
 - **Relevance**: E-commerce sales optimization is a critical business problem, valued by companies like Amazon, Shopify, and Walmart.
