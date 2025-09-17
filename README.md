@@ -41,11 +41,14 @@ Real-time **minute-level revenue** plot.
 
 ### 📊 Example Dashboard
 ## Forecasting Tab (Prophet/ARIMA)
-
-
 ## Live Mode Dashboard
-
-
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard1.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard2.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard3.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard4.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard5.PNG
+https://github.com/EduMartinezz/Ecommerce-sales-dashboard/blob/main/dashboard6.PNG
 
 
 ## 🛠️ Tech Stack
