@@ -1,118 +1,96 @@
-# Real-Time E-Commerce Sales Dashboard with Predictive Analytics
+### 🛒 Real-Time E-Commerce Sales Dashboard
+An **interactive Streamlit dashboard** for monitoring **e-commerce sales metrics,** analyzing customer behavior, and forecasting future sales.
+This project demonstrates a **full end-to-end workflow: data cleaning,** exploratory analysis, business KPIs, forecasting (Prophet/ARIMA), and real-time simulation via Streamlit.
 
-## Overview
-The **Real-Time E-Commerce Sales Dashboard** is an interactive web application built with Streamlit to monitor e-commerce sales metrics, analyze customer behavior, and forecast future sales. It leverages the Online Retail Dataset, with dates shifted from 2010–2012 to 2024–2025 to simulate real-time data. The dashboard provides real-time metrics (revenue, order volume, average order value), historical sales trends, and predictive analytics using ARIMA and Prophet models.
+## 📖 Project Overview
+- Leverages the **Online Retail dataset (2010–2012 shifted to 2024–2025)** to simulate live sales.
+- Provides **exploratory data analysis (EDA)** of customers, products, and regions.
+- Computes **key metrics**: Revenue, Orders, Average Order Value (AOV).
+- Implements **forecasting models** (Prophet, ARIMA) with backtesting.
+- Includes a **Live Mode simulator** to mimic real-time streaming orders.
+- Deployable in **Streamlit + ngrok (Colab-ready).**
 
-This project demonstrates a full end-to-end solution, combining data analytics, data science, and data engineering skills, making it highly relevant for e-commerce, retail, and tech industries.
+### 🚀 Features
+## 1. Data Cleaning & Preprocessing
+- Handles missing values and schema coercion.
+- Removes cancellations/returns (optional keep).
+- Computes **Revenue = Quantity × UnitPrice**.
+- Optionally shifts dates to **2024–2025** for “real-time” demos.
 
-## Features
-- **Real-Time Metrics**: Displays revenue, order volume, and average order value for the selected period, with period-over-period deltas (e.g., last 7 days vs. previous 7 days).
-- **Interactive Filters**: Filter by date range, country, forecast period (7 to 60 days), and metrics period (1 to 30 days).
-- **Sales Trend & Forecasts Plot**: Visualizes actual sales, a 7-day moving average, ARIMA (orange) and Prophet (blue) forecasts, with toggleable 95% confidence intervals.
-- **Performance Metrics**: Calculates RMSE for ARIMA and Prophet forecasts to evaluate accuracy.
-- **Downloads**: Export the sales trend plot as HTML (`sales_forecast.html`) and forecast data as CSV (`forecast_data.csv`).
-- **Debug Info**: Provides detailed statistics (e.g., date ranges, NaN counts, forecast stats) for troubleshooting.
+## 2. Exploratory Data Analysis (EDA)
+- **Daily revenue trends** with plots.
+- **Top products, customers, and countries.**
+- Revenue by **weekday and hour.**
+
+## 3. Business Metrics
+- **KPIs:** Revenue, Orders, AOV, Customers, Items sold.
+- **RFM analysis** (Recency, Frequency, Monetary).
+- Downloadable **RFM snapshot.**
+
+## 4. Forecasting
+- **Prophet** (if available) or **ARIMA**(auto-ARIMA fallback).
+- Adjustable **forecast horizon** (7–90 days).
+- **Backtest evaluation** (RMSE, MAPE).
+- Downloadable forecast CSV.
+
+## 5. Live Mode (Simulator)
+- Generates **synthetic orders** in the current filter context.
+- Batch streaming of rows per tick.
+- **Live KPIs (24h):** Revenue, Orders, AOV.
+Real-time **minute-level revenue** plot.
+
+### 📊 Example Dashboard
+## Forecasting Tab (Prophet/ARIMA)
 
 
-## Why This Project?
-- **Relevance**: E-commerce sales optimization is a critical business problem, valued by companies like Amazon, Shopify, and Walmart.
-- **Skill Diversity**: Showcases data analytics (dashboards, EDA), data science (time series forecasting with ARIMA and Prophet), and data engineering (real-time data processing, deployment).
-- **Scalability**: Simulates real-time data pipelines, with potential for expansion using Apache Spark or cloud deployment.
-- **Portfolio Impact**: An interactive, deployed dashboard with predictive analytics highlights depth in analytics, science, and engineering.
+## Live Mode Dashboard
 
-## Dataset
-- **Source**: [Online Retail Dataset](https://www.kaggle.com/datasets/jihyeseo/online-retail-data-set-from-uci-ml-repo) from Kaggle (originally from UCI ML Repository).
-- **Details**: Contains transactional data from a UK-based online retailer (invoices, products, quantities, prices, timestamps).
-- **Preprocessing**: Dates shifted to 2024–2025 to simulate real-time data. Cleaned data saved as `cleaned_data.csv`.
 
-## Prerequisites
-- **Python 3.11+**: Check with `python --version`.
-- **pip**: For installing dependencies.
-- **ngrok**: For public access ([ngrok.io](https://ngrok.com/download)).
 
-## Installation
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/[your-username]/ecommerce-sales-dashboard.git
-   cd ecommerce-sales-dashboard
 
-2. **Set Up a Virtual Environment**:
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+## 🛠️ Tech Stack
+- **Language**: Python
+- **Libraries**: pandas, numpy, matplotlib, prophet, pmdarima, streamlit
+- **Deployment**: Streamlit + ngrok (for Colab public URL)
+- **Environment**: Google Colab / Local Python
 
-3. **Install Dependencies**:
+### ▶️ Quickstart
+## 1) Clone & install
+git clone https://github.com/your-username/ecommerce-dashboard.git
+cd ecommerce-dashboard
 pip install -r requirements.txt
 
-4. **Set Up ngrok**:
-Download and install ngrok.
-Add your auth token:  ngrok authtoken YOUR_NGROK_AUTH_TOKEN
+## 2) Run locally
+streamlit run app_sales.py
 
-5. **Ensure Data Files**:
-Place cleaned_data.csv, arima_forecast.csv, and prophet_forecast.csv in the root directory.
+## Run in Colab (with ngrok)
+!pip install streamlit pyngrok prophet pmdarima
+!pkill -f streamlit || true
+!streamlit run app_sales.py --server.port 8501 &>/content/logs.txt &
 
-
-## Usage
-1. **Run locally**
-   streamlit run dashboard.py
-   Open http://localhost:8501 in your browser
-   
-2. **Run with ngrok**
-   streamlit run dashboard.py --server.port 8501
-   ngrok http 8501
-   Use the ngrok URL (e.g., https://<random-id>.ngrok.io) to access the dashboard publicly.
-
-3.**Interact with the Dashboard**
-  Use the sidebar to filter by date range, country, forecast period, and metrics period.
-  Toggle ARIMA/Prophet forecasts and confidence intervals.
-  Download the plot as HTML (sales_forecast.html) or data as CSV (forecast_data.csv).
+from pyngrok import ngrok
+ngrok.set_auth_token("YOUR_TOKEN")
+print("App:", ngrok.connect(8501))
 
 
-## File Structure
-ecommerce-sales-dashboard/
-├── dashboard.py           # Main Streamlit app
-├── cleaned_data.csv       # Historical sales data
-├── arima_forecast.csv     # ARIMA forecast data
-├── prophet_forecast.csv   # Prophet forecast data
-├── sales_forecast.html    # Downloadable plot (generated by dashboard)
-├── forecast_data.csv      # Downloadable forecast data (generated by dashboard)
-├── requirements.txt       # Dependency list
-├── images/                # Screenshots
-│   └── dashboard_screenshot.png
-└── README.md              # This file
+## 📈 Example Results
+**KPIs (sample 24h):**
+| Metric      | Value     |
+| ----------- | --------- |
+| **Revenue** | \$876,311 |
+| **Orders**  | 1,273     |
+| **AOV**     | \$688     |
 
-## Testing
-- Verify the plot shows data up to 2025-04-04 with a 30-day forecast.
+## Forecasting (30-day, Prophet):
 
-- Check "Debug Info" for correct dates (e.g., last actual date: 2025-04-04) and non-identical RMSE   values.
+- **MAE** ≈ 5,400
+- **MAPE** ≈ 8.2%
+- Captures **weekly & monthly seasonality.**
 
-- Download sales_forecast.html and forecast_data.csv to confirm they open correctly.
-
-## Troubleshooting
-- Missing Files: Ensure cleaned_data.csv, arima_forecast.csv, and prophet_forecast.csv are in the    root directory.
-- Plot Issues: Adjust the date range in filters or check "Debug Info" for NaN values
-- ngrok Errors: Verify your token and internet connection.
-
-
-## Future Improvements
-- Tune ARIMA/Prophet models for better accuracy (e.g., hyperparameter optimization).
-
-- Add product category analysis and customer segmentation.
-
-- Implement real-time data streaming with Apache Spark or Kafka.
-
-- Deploy on Streamlit Community Cloud for persistent access.
-
-## Contributing
-Fork this repo, create a branch, commit changes, and submit a pull request. Follow PEP 8 and add comments for clarity.
-
-## License
-MIT License (LICENSE)
-
-## Contact
-For issues, open a new issue or email your edumartinezbenj@gmail.com
-
-
-
-
-
+## 📂 Project Structure
+├── app_sales.py
+├── E_Commerce_Sales_Dashboard.ipynb
+├── requirements.txt
+├── README.md
+└── screenshots/
 
